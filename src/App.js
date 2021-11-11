@@ -12,16 +12,16 @@ class App extends Component{
   
   render(){
 
-    // let pokemonElArr = this.state.pokemonList.map((pokemonItem)=>{
-    //   return(
-    //     <img src={pokemonItem.image} alt="Pokemon Image" />
-    //   ) 
-    // });
-
     let pokemonNameElArr = this.state.pokemonList.map((pokemon)=>{
       return(
         <div className="pokemon-item-container">
-          Name: {pokemon.name}, Weight: {pokemon.weight}, Height: {pokemon.height}
+          <img src={pokemon.image} alt="Pokemon Image" />
+          <div>Name: {pokemon.name}</div>
+          <div>Weight: {pokemon.weight}</div>
+          <div>Height: {pokemon.height}</div>
+          <div>Health: {pokemon.hp}</div>
+          <div>Attack: {pokemon.atk}</div>
+          <div>Defense: {pokemon.def}</div>
         </div>
       )
     })
