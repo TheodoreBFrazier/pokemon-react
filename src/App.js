@@ -14,7 +14,9 @@ class App extends Component{
     console.log(this.state.pokemonList);
 
     let pokemonElArr = this.state.pokemonList.map((pokemonItem)=>{
-      return <img src={pokemonItem.image} alt="Pokemon Image" />
+      return(
+        <img src={pokemonItem.image} alt="Pokemon Image" />
+      ) 
     });
 
     // console.log(pokemonElArr);
