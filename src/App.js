@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import { Component } from 'react';
 import './App.css';
+import data from './data/sortedData';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(){
+    super();
+    this.state = {
+      pokemonList: data.pokemon
+    }
+  }
+  
+  render(){
+    console.log(this.state.pokemonList);
+
+    let pokemonElArr = this.state.pokemonList.map((pokemonItem)=>{
+      return <img src={pokemonItem.image} alt="Pokemon Image" />
+    });
+
+    // console.log(pokemonElArr);
+    
+    // [
+    //   {
+    //     name: "Bulbasaur"
+    //   },
+    //   {
+    //     name: "Ivysaur"
+    //   }
+    // ]
+
+    // [
+    //   <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" />,
+    //   <img src="" alt="" />,
+    // ]
+
+    return(
+      <div>
+        <h1>Pokémon React Code Along</h1>
+        { pokemonElArr }
+      </div>
+    )
+  }
 }
 
 export default App;
