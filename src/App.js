@@ -2,8 +2,6 @@ import { Component } from 'react';
 import './App.css';
 import data from './data/sortedData';
 
-import PokemonCard from './components/PokemonCard';
-
 class App extends Component{
   constructor(){
     super();
@@ -22,8 +20,20 @@ class App extends Component{
   render(){
 
     let pokemonNameElArr = this.state.pokemonList.map((pokemon)=>{
+      let { image, name, weight, height, hp, atk, def } = pokemon;
       return(
-        <PokemonCard key={pokemon.id} pokemon={pokemon} handlePokemonClick={this.handlePokemonClick} />
+        <div 
+            className="pokemon-item-container"
+            onClick={()=>this.handlePokemonClick(pokemon)}
+        >
+            <img src={image} alt="Pokemon Image" />
+            <div>Name: {name}</div>
+            <div>Weight: {weight}</div>
+            <div>Height: {height}</div>
+            <div>Health: {hp}</div>
+            <div>Attack: {atk}</div>
+            <div>Defense: {def}</div>
+        </div>
       )
     });
 
