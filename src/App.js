@@ -7,27 +7,31 @@ class App extends Component{
     super();
     this.state = {
       pokemonList: data.pokemon,
-      teamList: []
+      teamList: [],
+      teamWeight: 0,
+      teamAtk: 0,
+      teamHp: 0,
+      teamDef: 0
     }
-  }
-  handlePokemonClick = (pokemon)=> {
-    this.setState({
-      teamList: [...this.state.teamList, pokemon]
-    })
   }
   
   handlePokemonClick=(pokemon)=>{
-    
-    let newArr = [ ...this.state.teamList, pokemon ];
-    
+    if(this.state.teamList.length >= 6){
+      return;
+    }
+
     this.setState({
-      teamList: newArr
+      teamList: [...this.state.teamList, pokemon],
+      teamWeight: this.state.teamWeight + pokemon.weight,
+      teamAtk: this.state.teamAtk + pokemon.atk,
+      teamHp: this.state.teamHp + pokemon.hp,
+      teamDef: this.state.teamDef + pokemon.def
     })
   }
 
   render(){
 
-    let pokemonNameElArr = this.state.pokemonList.map((pokemon)=>{
+    let pokemonNameElArr = this.state.pokemonList.filter((poke)=>poke.id < 20).map((pokemon)=>{
       let { image, name, weight, height, hp, atk, def } = pokemon;
       return(
         <div
@@ -45,9 +49,31 @@ class App extends Component{
       )
     });
 
+    let pokemonTeamElArr = this.state.teamList.map((pokemon)=>{
+      return(
+        <div className="pokemon-team-item-container">
+          <img src={ pokemon.image } alt="pokemon image" />
+          <div>{ pokemon.name }</div>
+        </div>
+      )
+    })
+
     return(
       <div className="app" id="app-container">
         <h1>Pokémon React Code Along</h1>
+
+        <h2>Team</h2>
+        <div id="pokemon-team-container">
+          { pokemonTeamElArr }
+        </div>
+        <h3>Stats</h3>
+        <div>
+          <div>Weight: { this.state.teamWeight }</div>
+          <div>Health Points: { this.state.teamHp }</div>
+          <div>Attack: { this.state.teamAtk }</div>
+          <div>Defense: { this.state.teamDef }</div>
+        </div>
+        <h2>Pokédex</h2>
         <div id="pokemon-list-container">
           { pokemonNameElArr }
         </div>
